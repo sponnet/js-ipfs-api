@@ -81,8 +81,18 @@ module.exports = (arg) => {
 
       // Drop the request once we are actually done
       if (ps.listenerCount(topic) === 0) {
+        if (!callback) {
+          return new Promise((resolve, reject) => {
+            subscriptions[topic].once('close', resolve)
+            subscriptions[topic].abort()
+            subscriptions[topic] = null
+          })
+        }
+
+        subscriptions[topic].once('close', callback)
         subscriptions[topic].abort()
         subscriptions[topic] = null
+        return
       }
 
       if (!callback) {
