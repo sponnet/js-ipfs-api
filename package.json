@@ -79,7 +79,7 @@
     "eslint-plugin-react": "^7.8.1",
     "go-ipfs-dep": "^0.4.14",
     "gulp": "^3.9.1",
-    "interface-ipfs-core": "github:ipfs/interface-ipfs-core#37a8d2b",
+    "interface-ipfs-core": "github:ipfs/interface-ipfs-core#9cba111",
     "ipfs": "~0.28.2",
     "ipfsd-ctl": "~0.33.2",
     "pull-stream": "^3.6.8",
