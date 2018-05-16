@@ -13,10 +13,14 @@ module.exports = (send) => {
 
     const verbose = opts.v || opts.verbose
 
+    console.log('getting swarm peers...')
+
     send({
       path: 'swarm/peers',
       qs: opts
     }, (err, result) => {
+      console.log('got swarm peers...', err, result)
+
       if (err) {
         return callback(err)
       }
