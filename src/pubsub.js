@@ -84,15 +84,19 @@ module.exports = (arg) => {
         if (!callback) {
           return new Promise((resolve, reject) => {
             eos(subscriptions[topic].res, (err) => {
-              if (err) return reject(err)
-              resolve()
+              setTimeout(() => {
+                if (err) return reject(err)
+                resolve()
+              })
             })
             subscriptions[topic].req.abort()
             subscriptions[topic] = null
           })
         }
 
-        eos(subscriptions[topic].res, callback)
+        eos(subscriptions[topic].res, (err) => {
+          setTimeout(() => callback(err))
+        })
         subscriptions[topic].req.abort()
         subscriptions[topic] = null
         return
