@@ -83,14 +83,17 @@ module.exports = (arg) => {
       if (ps.listenerCount(topic) === 0) {
         if (!callback) {
           return new Promise((resolve, reject) => {
-            subscriptions[topic].once('close', () => resolve())
-            subscriptions[topic].abort()
+            eos(subscriptions[topic].res, (err) => {
+              if (err) return reject(err)
+              resolve()
+            })
+            subscriptions[topic].req.abort()
             subscriptions[topic] = null
           })
         }
 
-        subscriptions[topic].once('close', () => callback())
-        subscriptions[topic].abort()
+        eos(subscriptions[topic].res, callback)
+        subscriptions[topic].req.abort()
         subscriptions[topic] = null
         return
       }
@@ -164,12 +167,15 @@ module.exports = (arg) => {
 
     // Start the request and transform the response
     // stream to Pubsub messages stream
-    subscriptions[topic] = send.andTransform(request, PubsubMessageStream.from, (err, stream) => {
+    subscriptions[topic] = {}
+    subscriptions[topic].req = send.andTransform(request, PubsubMessageStream.from, (err, stream) => {
       if (err) {
         subscriptions[topic] = null
         ps.removeListener(topic, handler)
         return callback(err)
       }
+
+      subscriptions[topic].res = stream
 
       stream.on('data', (msg) => {
         ps.emit(topic, msg)
