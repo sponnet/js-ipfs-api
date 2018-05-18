@@ -77,7 +77,7 @@
     "cross-env": "^5.1.5",
     "dirty-chai": "^2.0.1",
     "eslint-plugin-react": "^7.8.1",
-    "go-ipfs-dep": "~0.4.15",
+    "go-ipfs-dep": "0.4.13",
     "gulp": "^3.9.1",
     "interface-ipfs-core": "~0.66.2",
     "ipfs": "~0.28.2",
