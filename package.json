@@ -71,7 +71,7 @@
     "url": "https://github.com/ipfs/js-ipfs-api"
   },
   "devDependencies": {
-    "aegir": "^13.1.0",
+    "aegir": "github:ipfs/aegir#upgrade-deps",
     "browser-process-platform": "~0.1.1",
     "chai": "^4.1.2",
     "cross-env": "^5.1.5",
@@ -80,8 +80,8 @@
     "go-ipfs-dep": "~0.4.15",
     "gulp": "^3.9.1",
     "interface-ipfs-core": "~0.66.2",
-    "ipfs": "~0.28.2",
-    "ipfsd-ctl": "~0.36.0",
+    "ipfs": "github:ipfs/js-ipfs#fix/node10",
+    "ipfsd-ctl": "github:ipfs/js-ipfsd-ctl#fix/node10",
     "pull-stream": "^3.6.8",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
